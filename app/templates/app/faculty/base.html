@@ -1,0 +1,239 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'app/images/favicon.ico' %}">
+
+    <title>Student Portal</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'app/css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Fontawesom -->
+    <link rel="stylesheet" href="{% static 'app/css/fontawesome/css/all.css' %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'app/css/site/dashboard.css' %}" rel="stylesheet">
+</head>
+
+<body>
+<!--
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+<a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Student Portal</a>
+
+<ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+        <a class="nav-link" href="#">Sign out</a>
+    </li>
+</ul>
+</nav>
+-->
+
+{% if request.user.faculty.is_active %}
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-bb sidebar">
+                <div class="user text-center" style="color: white;">
+                    <img src="{% static 'app/images/placeholder.jpg' %}" alt="" width="80px" height="80px"
+                         class="img-thumbnail rounded-circle">
+                    <h5 style="margin: 10px 0 0 0;">{{ user.first_name }}</h5>
+                    {#                <p style="margin: 0;">Registration Number</p>#}
+                </div>
+                <hr>
+                <div class="sidebar-sticky">
+
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link {% block fac_link_profile %}{% endblock %}" href="#">
+                                <span data-feather="home"></span>
+                                Profile
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link {% block fac_link_notification %}{% endblock %}"
+                               href="{% url 'faculty-notifications' %}">
+                                <span data-feather="message-square"></span>
+                                Notification <span
+                                    class="badge badge-light float-right mt-1">{{ request.user.faculty.get_current_notification_count }}</span>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                    {% if user.faculty.is_supervisor %}
+                        <h6 class="sidebar-heading mt-4" style="color: white;">
+                            <span>Supervisor</span>
+                        </h6>
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link {% block fac_link_supervisor_projects %}{% endblock %}"
+                                   href="{% url 'faculty-supervisor-projects' %}">
+                                    <span data-feather="file"></span>
+                                    Projects
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% block fac_link_group %}{% endblock %}"
+                                   href="{% url 'faculty-supervisor-groups' %}">
+                                    <span data-feather="users"></span>
+                                    Groups
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="message-square"></span>
+                                    Notifications
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                    {% if user.faculty.is_committee_head %}
+                        <h6 class="sidebar-heading mt-4" style="color: white;">
+                            <span>Committee Head</span>
+                        </h6>
+
+                        <ul class="nav flex-column">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="users"></span>
+                                    Supervisors
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file"></span>
+                                    Projects
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="users"></span>
+                                    Groups
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="message-square"></span>
+                                    Notifications
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                    {% if user.faculty.is_committee_member %}
+                        <h6 class="sidebar-heading mt-4" style="color: white;">
+                            <span>Committee Member</span>
+                        </h6>
+
+                        <ul class="nav flex-column">
+
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="users"></span>
+                                    Supervisors
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="file"></span>
+                                    Projects
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span data-feather="users"></span>
+                                    Groups
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                    {% if user.faculty.is_coordinator %}
+                        <h6 class="sidebar-heading mt-4" style="color: white;">
+                            <span>Coordinator</span>
+                        </h6>
+
+                        <ul class="nav flex-column">
+
+                            <li class="nav-item">
+                                <a class="nav-link {% block fac_link_co_faculty %}{% endblock %}"
+                                   href="{% url 'coordinator-supervisors' %}">
+                                    <span data-feather="users"></span>
+                                    Faculty
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link {% block fac_link_co_projects %}{% endblock %}"
+                                   href="{% url 'coordinator-projects' %}">
+                                    <span data-feather="layers"></span>
+                                    Projects
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+                    {% if user.faculty.is_evaluation_committee %}
+                        <h6 class="sidebar-heading mt-4" style="color: white;">
+                            <span>Evaluation Committee</span>
+                        </h6>
+
+                        <ul class="nav flex-column">
+                            <li class="nav-item">
+                                <a class="nav-link {% block fac_link_ec_proposal %}{% endblock %}"
+                                   href="{% url 'faculty-ec-proposals' %}">
+                                    <span data-feather="layers"></span>
+                                    Proposals
+                                </a>
+                            </li>
+                        </ul>
+                    {% endif %}
+
+
+                </div>
+
+                <div class="text-center">
+                    <hr>
+                    <a href="{% url 'logout' %}" class="btn btn-white mt-2 mb-5">Sign Out</a>
+                </div>
+
+            </nav>
+
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                {% block content %}
+                {% endblock %}
+            </main>
+        </div>
+    </div>
+{% else %}
+    <div class="d-flex justify-content-center align-items-center" style="height: 100vh; width: 100%;">
+        <p class="display-4 text-muted">You no longer have access to portal.</p>
+    </div>
+{% endif %}
+{#shairani c hai#}
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="{% static 'app/js/jquery.js' %}"></script>
+<script>
+    window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')
+</script>
+{#<script src="../../assets/js/vendor/popper.min.js"></script>#}
+<script src="{% static 'app/js/bootstrap/bootstrap.min.js' %}"></script>
+
+<!-- Icons -->
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
+
+</body>
+
+</html>

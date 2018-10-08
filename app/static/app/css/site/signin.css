@@ -1,0 +1,152 @@
+html,
+body {
+    height: 100%;
+}
+
+body {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    /*    background-color: #f5f5f5;*/
+    background-color: #ffffff;
+}
+
+.form-signin {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+}
+
+.form-signin .checkbox {
+    font-weight: 400;
+}
+
+.form-signin .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+
+.form-signin .form-control:focus {
+    z-index: 2;
+}
+
+/*.form-signin input[type="email"],*/
+
+.input-start {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.input-first,
+.input-center,
+.input-last {
+    margin-bottom: -1px !important;
+}
+
+.input-first {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.input-center {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.input-last {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+/*.form-signin input[type="password"],*/
+
+.input-end {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+
+.validation-container {
+    position: relative;
+}
+
+.validation-container .validator {
+    position: absolute;
+    width: 300px;
+    top: 0;
+    left: 105%;
+    background-color: white;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 5;
+    border-radius: 8px;
+    padding: 10px;
+    transition: all 1s;
+    opacity: 0;
+}
+
+.input-group:focus + .validator,
+input:focus + .validator {
+    opacity: 1;
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid white;
+
+    position: absolute;
+    right: 100%;
+}
+
+
+.strength .strength-box {
+    display: block;
+    width: 100%;
+    height: 5px;
+    border: 1px solid #ccc;
+}
+
+#strength-very-low {
+    background-color: #c0392b;
+    border: 1px solid #c0392b;
+}
+
+#strength-low {
+    background-color: #d35400;
+    border: 1px solid #d35400;
+}
+
+#strength-medium {
+    background-color: #f39c12;
+    border: 1px solid #f39c12;
+}
+
+#strength-strong {
+    background-color: #2ecc71;
+    border: 1px solid #2ecc71;
+}
+
+#strength-very-strong {
+    background-color: #27ae60;
+    border: 1px solid #27ae60;
+}
+
+
+.hidden {
+    display: none !important;
+}

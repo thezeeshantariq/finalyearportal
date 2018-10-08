@@ -1,0 +1,189 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'app/images/favicon.ico' %}">
+
+    <title>Faculty Signup</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'app/css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!--    Font Awesome -->
+    <link rel="stylesheet" href="{% static 'app/css/fontawesome/css/all.min.css' %}">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'app/css/site/signin.css' %}" rel="stylesheet">
+</head>
+
+{#password: 1@aS1@aS#}
+
+<body>
+<form class="form-signin" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="title text-center">
+        <img class="mb-4" src="{% static 'app/images/logo.jpg' %}" alt="" width="100" height="100">
+        <h1 class="h3 mb-3 font-weight-normal">Faculty Signup</h1>
+    </div>
+
+    <div class="validation-container">
+        <label for="input_name" class="sr-only">Name</label>
+        <input type="text" id="input_name" class="form-control input-start" name="faculty_name" placeholder="Name"
+               required autofocus>
+
+        <div class="validator" id="validator_name">
+            <div class="arrow-left"></div>
+            <p>
+                <small>Your name must be as follwing:</small>
+            </p>
+            <ul class="validaor-check-list" id="validator_name_checklist">
+                <li id="validator_option_gte_3">
+                    <div class="msg text-muted">
+                        <small>At least <b>3</b> characters</small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+                <li id="validator_option_no_alphanumeric">
+                    <div class="msg text-muted">
+                        <small>Must not contain any <b>numeric or alphanumeric</b></small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="validation-container">
+        <label for="input_email" class="sr-only">Email address</label>
+        <input type="email" id="input_email" class="form-control input-center" name="faculty_email"
+               placeholder="Email address" required>
+
+        <div class="validator" id="validator_email">
+            <div class="arrow-left"></div>
+            <p>
+                <small>Your email must be as following format:</small>
+            </p>
+            <ul class="validaor-check-list" id="validator_email_checklist">
+                <li id="validator_option_valid_email">
+                    <div class="msg text-muted">
+                        <small>example@domain.com</small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+
+    <div class="validation-container">
+
+        <label for="input_password" class="sr-only">Password</label>
+        <input type="password" id="input_password" name="faculty_password" class="form-control input-center"
+               placeholder="Password" required>
+
+        <div class="validator">
+            <div class="arrow-left"></div>
+            <p>
+                <small>Your password must be/contain following:</small>
+            </p>
+            <ul class="validaor-check-list" id="validator_password_checklist">
+                <li id="validation_option_gte_8">
+                    <div class="msg text-muted">
+                        <small>At least <b>8</b> characters</small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+                <li id="validation_option_numeric">
+                    <div class="msg text-muted">
+                        <small>At least <b>1 Numeric Character</b></small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+                <li id="validation_option_lower_case">
+                    <div class="msg text-muted">
+                        <small>At least <b>1 Lower Case Letter</b></small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+                <li id="validation_option_uppercase">
+                    <div class="msg text-muted">
+                        <small>At least <b>1 Upper Case Letter</b></small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+                <li id="validation_option_alphanumeric">
+                    <div class="msg text-muted">
+                        <small>At least <b>1 Alphanumeric Character</b></small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+            </ul>
+            <p>
+                <small>Strength:</small>
+            </p>
+            <div class="strength">
+                <table style="width: 100%">
+                    <tr>
+                        <td><span class="strength-box hidden" id="strength-very-low"></span></td>
+                        <td><span class="strength-box hidden" id="strength-low"></span></td>
+                        <td><span class="strength-box hidden" id="strength-medium"></span></td>
+                        <td><span class="strength-box hidden" id="strength-strong"></span></td>
+                        <td><span class="strength-box hidden" id="strength-very-strong"></span></td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="validation-container">
+        <label for="input_password_confirm" class="sr-only">Password</label>
+        <input type="password" id="input_password_confirm" name="faculty_password_confirm" class="form-control input-end" placeholder="Confirm Password"
+               required>
+
+        <div class="validator" id="validator_email">
+            <div class="arrow-left"></div>
+            <p>
+                <small>Confirm Password:</small>
+            </p>
+            <ul class="validaor-check-list" id="validator_confirm_password_checklist">
+                <li id="validator_option_match_password">
+                    <div class="msg text-muted">
+                        <small id="confirm_password_error">Your password must match with provided password</small>
+                        <i class="fas fa-times-circle times"></i>
+                        <i class="fas fa-check-circle check hidden"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <label for="student_image">Image</label>
+        <input type="file" class="form-control-file" id="faculty_image" name="student_image"
+               accept=".jpg, .jpeg, .png" placeholder="Hello Here">
+    </div>
+
+{#    <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn_submit" disabled>Sign Up</button>#}
+    <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn_submit" >Sign Up</button>
+    <a href="{% url 'login-as-faculty' %}" class="mt-3 text-center" style="display:block;">Already have account, Login</a>
+
+    <p class="mt-5 mb-3 text-muted text-center">&copy;FYP Portal 2017-2018</p>
+</form>
+
+<script src="{% static 'app/js/jquery.js' %}"></script>
+{#<script src="{% static 'app/js/validation.js' %}"></script>#}
+
+</body>
+
+</html>

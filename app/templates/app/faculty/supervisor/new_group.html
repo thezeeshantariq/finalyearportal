@@ -1,0 +1,63 @@
+{% extends 'app/faculty/base.html' %}
+{% block fac_link_group %}active{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between border-bottom pb-3">
+        <h2>Create new group</h2>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-6">
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="group_name">Group Name</label>
+                    <input type="text" name="group_name" class="form-control" aria-describedby="titleHelp"
+                           placeholder="Name of group" required>
+                    <small id="titleHelp" class="form-text text-muted">Provide name of group for recognition
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label for="group_project">Select Project</label>
+                    <select name="group_project" id="group_project">
+                        <option value="-">Select Project</option>
+                    </select>
+                    <small id="titleHelp" class="form-text text-muted">Select project you want to assign group
+                    </small>
+                </div>
+                {% if project %}
+                    <div class="form-group">
+                        <label for="project_proposal">Proposal Attached: </label>
+                        <a href="{{ project.proposal.url }}">View Proposal</a>
+                    </div>
+                {% endif %}
+                <div class="form-group">
+                    <label for="project_proposal">Proposal</label>
+                    <input type="file" class="form-control-file" id="project_proposal" name="project_proposal"
+                           accept="application/msword, application/pdf" placeholder="Hello Here" required>
+                </div>
+                <div class="form-group">
+                    <label for="project_description">Brief Description</label>
+                    <textarea name="project_description" id="project_description" cols="30" rows="10"
+                              class="form-control">{% if project %}{{ project.description }}{% endif %}
+                    </textarea>
+                    <small id="descriptionHelp" class="form-text text-muted">Provide short and explanatory description
+                        for your project
+                    </small>
+                </div>
+
+
+                <button type="submit" class="btn btn-primary">Submit Request</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

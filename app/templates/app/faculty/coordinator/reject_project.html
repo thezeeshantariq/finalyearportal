@@ -1,0 +1,35 @@
+{% extends 'app/faculty/base.html' %}
+{% block fac_link_co_projects %}active{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between border-bottom pb-3">
+        <h2>Reject Project <b>"{{ project.title }}"</b></h2>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-6">
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post" action="{% url 'coordinator-reject-project' project.projectrequest.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="reason">Reason:</label>
+                    <textarea name="reason" id="reason" cols="30" rows="10"
+                              class="form-control"></textarea>
+                    <small id="descriptionHelp" class="form-text text-muted">Provide to the point reason for project
+                        rejection
+                    </small>
+                </div>
+
+                <button type="submit" class="btn btn-danger">Reject Project</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

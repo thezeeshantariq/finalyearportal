@@ -1,0 +1,204 @@
+{% load  static %}
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="{% static 'app/images/favicon.ico' %}">
+
+    <title>Final Year Student Portal</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="{% static 'app/css/bootstrap/bootstrap.min.css' %}" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{% static 'app/css/site/master.css' %}" rel="stylesheet">
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-md bg-white mt-2 border-bottom pb-3" >
+    <a class="navbar-brand ml-5" href="#">
+        <div class="d-flex">
+            <div>
+                <img src="{% static 'app/images/logo.png' %}" alt="" width="80px">
+            </div>
+
+            <div class="ml-3 d-flex flex-column justify-content-center">
+                <h4 class="m-0">Final Year</h4>
+                <p class="m-0 text-muted">
+                    <small>Project Portal</small>
+                </p>
+            </div>
+        </div>
+
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse"
+            aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <div class="ml-auto">
+            {% if user.is_authenticated %}
+                <div class="d-flex align-items-center">
+                    <div>
+                        <img src="{% static 'app/images/placeholder.jpg' %}" alt="" class="rounded-circle" width="50px"
+                             height="50px">
+                        <b>{{ user.first_name }}</b>
+                    </div>
+                    <div class="ml-3">
+                        {% if user.is_student %}
+                            <a href="{% url 'student-portal' user.student.id %}" class="btn btn-primary mr-1">Portal</a>
+                        {% else %}
+                            <a href="{% url 'faculty-portal' %}" class="btn btn-primary mr-1">Portal</a>
+                        {% endif %}
+                        <a href="{% url 'logout' %}" class="btn btn-danger">Logout</a>
+                    </div>
+                </div>
+            {% else %}
+                <a href="{% url 'login-as-faculty' %}" class="btn btn-white-outline my-2 my-sm-0">Sign In As
+                    Faculty</a>
+                <a href="{% url 'login-as-student' %}" class="btn btn-white my-2 ml-2 my-sm-0">Sign In As Student</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+<div class="position-relative overflow-hidden text-center bg-white">
+    <div class="col-md-5 p-lg-5 mx-auto my-5">
+        <h1 class="display-4 font-weight-normal">Final Year Project Portal</h1>
+        <p class="lead font-weight-normal">A solution for managing Final year projects through provided web portal for
+            Student and Faculty</p>
+        <a class="btn btn-white" href="{% url 'register-as-student' %}">Register as Student</a>
+        <a class="btn btn-light" href="{% url 'register-as-faculty' %}">Register as Faculty</a>
+    </div>
+{#    <div class="product-device box-shadow d-none d-md-block"></div>#}
+{#    <div class="product-device product-device-2 box-shadow d-none d-md-block"></div>#}
+</div>
+
+<div class="container">
+    <div class="row mt-5 mb-5">
+        <div class="col-xs-12 col-lg-12 text-center">
+            <h1>
+                Tool for Faculty and Students
+            </h1>
+            <p class="text-muted"><b>The whole process of Final Year Project is now under some clicks</b></p>
+            <div class="mt-5 mb-5 dash"></div>
+        </div>
+    </div>
+    <div class="row mt-5 mb-5">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <div class="flex-center">
+                <div class="flex-container mt-4">
+                    <h3>Manager under the fingers</h3>
+                    <p>Now manage your project online</p>
+                    <ul>
+                        <li>Create project request</li>
+                        <li>Create stduent groups</li>
+                        <li>Manage Student Groups</li>
+                        <li>Assign Tasks</li>
+                        <li>Give feedback online</li>
+                        <li>Get your feedback</li>
+                    </ul>
+                    <a href="#" class="btn btn-white-outline my-2 my-sm-0">Register As Faculty</a>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <img src="{% static 'app/images/img2.jpg' %}" alt="" class="img-fluid">
+        </div>
+    </div>
+
+    <div class="row mt-5 mb-5">
+        <div class="col-xs-12 col-lg-12 text-center">
+            <h1>
+                Get updated from your home
+            </h1>
+            <p class="text-muted"><b>With user friendly interface and limited number of clicks</b></p>
+            <div class="mt-5 mb-5 dash"></div>
+        </div>
+    </div>
+    <div class="row  mt-5 mb-5">
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <img src="{% static 'app/images/img4.jpg' %}" alt="" class="img-fluid">
+        </div>
+        <div class="col-xs-12 col-md-6 col-lg-6">
+            <div class="flex-center">
+                <div class="flex-container mt-4">
+                    <h3>Manager under the fingers</h3>
+                    <p>Now manage your project online</p>
+                    <ul>
+                        <li>Create project request</li>
+                        <li>Create stduent groups</li>
+                        <li>Manage Student Groups</li>
+                        <li>Assign Tasks</li>
+                        <li>Give feedback online</li>
+                        <li>Get your feedback</li>
+                    </ul>
+                    <a href="#" class="btn btn-white-outline my-2 my-sm-0">Register As Student</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="mt-5 mb-5">
+
+</div>
+
+
+<footer class="container py-5">
+    <div class="row">
+        <div class="col-12 col-md text-center">
+            <img src="{% static 'app/images/logo.jpg' %}" alt="" width="120px">
+            <small class="d-block mb-3 text-muted">&copy; 2017-2018</small>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Features</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Cool stuff</a></li>
+                <li><a class="text-muted" href="#">Random feature</a></li>
+                <li><a class="text-muted" href="#">Team feature</a></li>
+                <li><a class="text-muted" href="#">Stuff for developers</a></li>
+                <li><a class="text-muted" href="#">Another one</a></li>
+                <li><a class="text-muted" href="#">Last time</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Resource</a></li>
+                <li><a class="text-muted" href="#">Resource name</a></li>
+                <li><a class="text-muted" href="#">Another resource</a></li>
+                <li><a class="text-muted" href="#">Final resource</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>Resources</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Business</a></li>
+                <li><a class="text-muted" href="#">Education</a></li>
+                <li><a class="text-muted" href="#">Government</a></li>
+                <li><a class="text-muted" href="#">Gaming</a></li>
+            </ul>
+        </div>
+        <div class="col-6 col-md">
+            <h5>About</h5>
+            <ul class="list-unstyled text-small">
+                <li><a class="text-muted" href="#">Team</a></li>
+                <li><a class="text-muted" href="#">Locations</a></li>
+                <li><a class="text-muted" href="#">Privacy</a></li>
+                <li><a class="text-muted" href="#">Terms</a></li>
+            </ul>
+        </div>
+    </div>
+</footer>
+
+
+</body>
+
+</html>

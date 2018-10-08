@@ -1,0 +1,36 @@
+{% extends 'app/faculty/base.html' %}
+{% block fac_link_ec_proposal %}active{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between border-bottom pb-3">
+        <h2>Accept Project <b>"{{ project.project.title }}"</b></h2>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-6">
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post" action="{% url 'faculty-ec-approve' project.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="comment">Comment:</label>
+                    <textarea name="comment" id="comment" cols="30" rows="10"
+                              class="form-control"></textarea>
+
+                    <small id="descriptionHelp" class="form-text text-muted">Provide to comments if needed otherwise you
+                        can leave it optional
+                    </small>
+                </div>
+
+                <button type="submit" class="btn btn-success">Approve Project</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

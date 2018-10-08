@@ -1,0 +1,44 @@
+{% extends 'app/faculty/base.html' %}
+{% load static %}
+{% block fac_link_notification %}active{% endblock %}
+{% block content %}
+    <h2 class="border-bottom pb-3">Notifications</h2>
+    {% for n in notifications %}
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        {% if not n.is_seen %}
+                            <div class="text-right">
+                                <a href="{% url 'mark-faculty-notification-read' n.id %}">Mark Read</a>
+                            </div>
+                            <p class="badge badge-danger">Unread</p>
+                        {% endif %}
+                        <h5 class="card-title">{{ n.title }}</h5>
+                        <p class="card-text">{{ n.text }}</p>
+                        <div class="d-flex">
+                            <p class="text-muted">
+                                <small>Sender: {{ n.sender.user.first_name }}</small>
+                            </p>
+                            <p class="ml-3 text-muted">
+                                <small>Dated: {{ n.created_at.date }} </small>
+                            </p>
+                            <p class="ml-3 text-muted">
+                                <small>Time: {{ n.created_at.time }}</small>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    {% empty %}
+        <div class="shadow-sm p-3 mb-5 bg-white rounded d-flex justify-content-center align-items-center"
+             style="width: 100%; height: 70vh;">
+            <p class="display-4">
+                <small style="color: #cccccc;">No Notification Yet</small>
+            </p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

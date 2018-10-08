@@ -1,0 +1,62 @@
+{% extends 'app/faculty/base.html' %}
+{% block fac_link_co_projects %}active{% endblock %}
+{% block content %}
+    <h2>Project Requests</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Proposal</th>
+                <th>Status</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for p in projects %}
+                <tr>
+                    <td>{{ p.id }}</td>
+                    <td>{{ p.title }}</td>
+                    <td>{{ p.description }}</td>
+                    <td><a href="{{ p.proposal.url }}" target="_blank">View Proposal</a></td>
+                    <td>
+                        {% if p.projectrequest.is_active %}
+                            {% if p.projectrequest.is_accepted %}
+                                <span class="badge badge-success">Approved</span>
+                            {% elif p.projectrequest.is_forwarded %}
+                                <span class="badge badge-primary">Under Evaluation</span>
+                            {% elif p.projectrequest.is_need_changes %}
+                                <span class="badge badge-danger">Changes Required</span>
+                            {% else %}
+                                <span class="badge badge-warning">Pending</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="badge badge-danger">Rejected</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                    {% if not p.projectrequest.is_accepted and not p.projectrequest.is_need_changes %}
+                        {% if p.projectrequest.is_active and not p.projectrequest.is_forwarded %}
+                            <a href="{% url 'coordinator-forward-project' p.projectrequest.id %}" class="btn btn-primary btn-sm" title="Forward for evaluation">Forward</a>
+                        {% endif %}
+                        {% if p.projectrequest.is_forwarded %}
+                            <span class="btn btn-outline-warning btn-sm disabled">Evaluating...</span>
+                        {% elif p.projectrequest.is_active %}
+                            <a href="{% url 'coordinator-reject-project' p.projectrequest.id %}"
+                               class="btn btn-danger btn-sm">Reject</a>
+                        {% endif %}
+                    {% endif %}
+
+                    </td>
+
+                </tr>
+            {% empty %}
+                No Projects added yet
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'app/faculty/base.html' %}
+{% block fac_link_ec_proposal %}active{% endblock %}
+{% block content %}
+    <div class="d-flex justify-content-between border-bottom pb-3">
+        <h2>Suggest changes for <b>"{{ project.project.title }}"</b></h2>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col-sm-6">
+
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+            <form method="post" action="{% url 'faculty-ec-changes' project.id %}">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="changes">Changes Needed:</label>
+                    <textarea name="changes" id="changes" cols="30" rows="10"
+                              class="form-control"></textarea>
+
+                    <small id="descriptionHelp" class="form-text text-muted">Provide changes required for the given project
+                    </small>
+                </div>
+
+                <button type="submit" class="btn btn-warning">Suggest Changes</button>
+            </form>
+        </div>
+    </div>
+
+{% endblock %}

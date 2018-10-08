@@ -1,0 +1,88 @@
+{% extends 'app/faculty/base.html' %}
+{% block fac_link_co_faculty %}active{% endblock %}
+{% block content %}
+    <h2>Faculty</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-sm">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Supervisor</th>
+                <th>Coordinator</th>
+                <th>Committee Head</th>
+                <th>Committee Member</th>
+                <th>Evaluation Committee</th>
+                <th>Active</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for f in faculty %}
+                <tr>
+                    <td>{{ f.id }}</td>
+                    <td>{{ f.user.first_name }}</td>
+                    <td>{{ f.user.email }}</td>
+                    <td>
+                        {% if f.is_supervisor %}
+                            <span class="text-success"><i class="fa fa-check-circle"></i></span>
+                            <a href="{% url 'remove-supervisor' f.id %}" class="text-danger">Remove</a>
+                        {% else %}
+                            <span class="text-danger"><i class="fa fa-times-circle"></i></span>
+                            <a href="{% url 'make-supervisor' f.id %}" class="text-success">Make</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if f.is_coordinator %}
+                            <span class="text-success"><i class="fa fa-check-circle"></i></span>
+                            <a href="{% url 'remove-coordinator' f.id %}" class="text-danger">Remove</a>
+                        {% else %}
+                            <span class="text-danger"><i class="fa fa-times-circle"></i></span>
+                            <a href="{% url 'make-coordinator' f.id %}" class="text-success">Make</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if f.is_committee_head %}
+                            <span class="text-success"><i class="fa fa-check-circle"></i></span>
+                            <a href="{% url 'remove-committee-head' f.id %}" class="text-danger">Remove</a>
+                        {% else %}
+                            <span class="text-danger"><i class="fa fa-times-circle"></i></span>
+                            <a href="{% url 'make-committee-head' f.id %}" class="text-success">Make</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if f.is_committee_member %}
+                            <span class="text-success"><i class="fa fa-check-circle"></i></span>
+                            <a href="{% url 'remove-committee-member' f.id %}" class="text-danger">Remove</a>
+                        {% else %}
+                            <span class="text-danger"><i class="fa fa-times-circle"></i></span>
+                            <a href="{% url 'make-committee-member' f.id %}" class="text-success">Make</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if f.is_evaluation_committee %}
+                            <span class="text-success"><i class="fa fa-check-circle"></i></span>
+                            <a href="{% url 'remove-committee-evaluation' f.id %}" class="text-danger">Remove</a>
+                        {% else %}
+                            <span class="text-danger"><i class="fa fa-times-circle"></i></span>
+                            <a href="{% url 'make-committee-evaluation' f.id %}" class="text-success">Make</a>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if f.is_active %}
+                            <a href="{% url 'deactivate-faculty' f.id %}" class="btn btn-outline-danger btn-sm">Deactivate</a>
+                        {% else %}
+                            <a href="{% url 'activate-faculty' f.id %}" class="btn btn-outline-success btn-sm">Activate</a>
+                        {% endif %}
+                    </td>
+                    <td>Action</td>
+                </tr>
+            {% empty %}
+                No faculty is added yet
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

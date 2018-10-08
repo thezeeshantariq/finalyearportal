@@ -1,0 +1,20 @@
+{% extends 'app/students/base.html' %}
+{% load static %}
+{% block std_link_group_members %}active{% endblock %}
+{% block content %}
+    <h2 class="border-bottom pb-3">Group Members</h2>
+
+    {% if group %}
+    {% else %}
+        <div class="bg-white rounded d-flex flex-column justify-content-center align-items-center"
+             style="width: 100%; height: 70vh;">
+            <p class="display-4">
+                <small class="text-muted">No Member Yet</small>
+            </p>
+            <p>
+                You are not member of any group. Contact your supervisor to be a part
+            </p>
+        </div>
+    {% endif %}
+    
+{% endblock %}
