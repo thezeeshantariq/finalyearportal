@@ -24,7 +24,7 @@ SECRET_KEY = '9!cuoi*hj=*f14xe_lu^4g#3di27z$s-!st84rq5=tjhs#ky%e'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['pythondeveloper.pythonanywhere.com', 'localhost', '127.0.0.1']
 
 
 AUTH_USER_MODEL = 'app.User'
