@@ -120,7 +120,7 @@ def signup_as_faculty(request):
                 faculty.save()
 
                 login(request, user)
-                return redirect('faculty-portal', pk=user.faculty.id)
+                return redirect('faculty-portal')
             else:
                 # error about registration
                 pass
